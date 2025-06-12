@@ -1,9 +1,9 @@
-package servicio;
+package com.example.trabajadores.servicio;
 
-import modelo.Trabajador;
+import com.example.trabajadores.modelo.Trabajador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositorio.TrabajadorRepositorio;
+import com.example.trabajadores.repositorio.TrabajadorRepositorio;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,10 +1,10 @@
-package controlador;
+package com.example.trabajadores.controlador;
 
-import modelo.Trabajador;
+import com.example.trabajadores.modelo.Trabajador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import servicio.TrabajadorServicio;
+import com.example.trabajadores.servicio.TrabajadorServicio;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package modelo;
+package com.example.trabajadores.modelo;
 
 import jakarta.persistence.*;
 import lombok.Getter;
