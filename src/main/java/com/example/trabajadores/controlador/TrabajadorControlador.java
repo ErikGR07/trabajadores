@@ -29,20 +29,17 @@ public class TrabajadorControlador {
 
     @GetMapping("/{id}")
     public ResponseEntity<Trabajador> obtener(@PathVariable Long id) {
-        Trabajador trabajador = servicio.obtenerPorId(id);
-        return ResponseEntity.ok(trabajador);
+        return ResponseEntity.ok(servicio.obtenerPorId(id));
     }
 
     @PostMapping
     public ResponseEntity<Trabajador> crear(@RequestBody Trabajador trabajador) {
-        Trabajador creado = servicio.crear(trabajador);
-        return ResponseEntity.ok(creado);
+        return ResponseEntity.ok(servicio.crear(trabajador));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Trabajador> actualizar(@PathVariable Long id, @RequestBody Trabajador trabajador) {
-        Trabajador actualizado = servicio.actualizar(id, trabajador);
-        return ResponseEntity.ok(actualizado);
+        return ResponseEntity.ok(servicio.actualizar(id, trabajador));
     }
 
     @DeleteMapping("/{id}")
