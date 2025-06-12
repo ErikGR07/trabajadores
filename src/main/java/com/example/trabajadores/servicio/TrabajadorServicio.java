@@ -1,33 +1,14 @@
 package com.example.trabajadores.servicio;
 
 import com.example.trabajadores.modelo.Trabajador;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.example.trabajadores.repositorio.TrabajadorRepositorio;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class TrabajadorServicio {
-
-        @Autowired
-        private TrabajadorRepositorio repository;
-
-        public List<Trabajador> listar() {
-            return repository.findAll();
-        }
-
-        public Optional<Trabajador> obtener(Long id) {
-            return repository.findById(id);
-        }
-
-        public Trabajador guardar(Trabajador trabajador) {
-            return repository.save(trabajador);
-        }
-
-        public void eliminar(Long id) {
-            repository.deleteById(id);
-        }
+public interface TrabajadorServicio {
+        List<Trabajador> listar();
+        Trabajador obtenerPorId(Long id);
+        Trabajador crear(Trabajador trabajador);
+        Trabajador actualizar(Long id, Trabajador trabajador);
+        void eliminar(Long id);
     }
 

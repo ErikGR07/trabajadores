@@ -1,10 +1,17 @@
 package com.example.trabajadores.controlador;
 
 import com.example.trabajadores.modelo.Trabajador;
+import com.example.trabajadores.servicio.TrabajadorServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import com.example.trabajadores.servicio.TrabajadorServicio;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -13,42 +20,34 @@ import java.util.List;
 public class TrabajadorControlador {
 
     @Autowired
-    private TrabajadorServicio service;
+    private TrabajadorServicio servicio;
 
     @GetMapping
     public List<Trabajador> listar() {
-        return service.listar();
+        return servicio.listar();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Trabajador> obtener(@PathVariable Long id) {
-        return service.obtener(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Trabajador trabajador = servicio.obtenerPorId(id);
+        return ResponseEntity.ok(trabajador);
     }
 
     @PostMapping
-    public Trabajador crear(@RequestBody Trabajador trabajador) {
-        return service.guardar(trabajador);
+    public ResponseEntity<Trabajador> crear(@RequestBody Trabajador trabajador) {
+        Trabajador creado = servicio.crear(trabajador);
+        return ResponseEntity.ok(creado);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Trabajador> actualizar(@PathVariable Long id, @RequestBody Trabajador trabajador) {
-        return service.obtener(id)
-                .map(actual -> {
-                    trabajador.setId(id);
-                    return ResponseEntity.ok(service.guardar(trabajador));
-                })
-                .orElse(ResponseEntity.notFound().build());
+        Trabajador actualizado = servicio.actualizar(id, trabajador);
+        return ResponseEntity.ok(actualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        return service.obtener(id)
-                .map(t -> {
-                    service.eliminar(id);
-                    return ResponseEntity.ok().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+        servicio.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }
